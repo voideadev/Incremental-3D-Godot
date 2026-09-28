@@ -3,7 +3,7 @@ extends Marker3D  # Este script hace de "spawner": desde aquí se crean todos lo
 @export var mesh_cubo: Mesh  # La forma visual del bloque. Puede ser un cubo o cualquier modelo tuyo.
 @export var collision_shape: Shape3D  # La forma física. Ojo: no es lo mismo que el mesh, aquí es lo que choca.
 @export var elasticidad: float = 0.5  # Cuánto rebota. 0 = se queda tieso, 1 = rebote casi infinito.
-@export var friccion: float = 0.8  # Cuánto se desliza. Alto = se frena rápido, bajo = resbala como hielo.
+@export var friccion: float = 1.0  # Cuánto se desliza. Alto = se frena rápido, bajo = resbala como hielo.
 @export var masa: float = 1.0  # El peso. Más masa = más cuesta moverlo y más se apila.
 @export var offset_spawn: Vector3 = Vector3(0, 20, 0)  # Dónde aparecen respecto al marker. Por defecto 20 arriba para que caigan.
 
