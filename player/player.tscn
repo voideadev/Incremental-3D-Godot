@@ -1,0 +1,107 @@
+[gd_scene format=3 uid="uid://gxgylar256j1"]
+
+[ext_resource type="Texture2D" uid="uid://bocoa35fo2ylx" path="res://icon.svg" id="1_oul6g"]
+[ext_resource type="Script" uid="uid://bd4qo5on5vle5" path="res://player/player.gd" id="1_rkbax"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gyc6d"]
+transparency = 1
+albedo_texture = ExtResource("1_oul6g")
+uv1_offset = Vector3(0.594, 0.073, 0)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_g7b7a"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g7b7a"]
+radius = 0.4
+height = 2.3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g7b7a"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
+[node name="Player" type="CharacterBody3D" unique_id=444559745]
+collision_layer = 2
+script = ExtResource("1_rkbax")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1985254762]
+transform = Transform3D(-0.80108994, 0, -0.598544, 0, 1, 0, 0.598544, 0, -0.80108994, 0, 0, 0)
+visible = false
+material_override = SubResource("StandardMaterial3D_gyc6d")
+mesh = SubResource("CapsuleMesh_g7b7a")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=366768078]
+shape = SubResource("CapsuleShape3D_g7b7a")
+
+[node name="Pivot" type="Node3D" parent="." unique_id=8290951]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.51753914, 0)
+
+[node name="RayCast3D" type="RayCast3D" parent="Pivot" unique_id=1035917463]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35320282, -0.08123529)
+target_position = Vector3(0, 0, -2)
+
+[node name="Camera3D" type="Camera3D" parent="Pivot" unique_id=1837813343]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3578769, 0)
+
+[node name="Marker3D" type="Marker3D" parent="Pivot/Camera3D" unique_id=423298707]
+transform = Transform3D(1.0000004, 4.656613e-09, -2.6077032e-08, 5.122274e-09, 1.0000002, 1.1258817e-07, -7.450581e-09, -1.10958354e-07, 1.0000004, 0, 0, -1.8450396)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=572870638]
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=270850310]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VirtualJoystick" type="VirtualJoystick" parent="CanvasLayer/Control" unique_id=1476121719]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 507.0
+grow_vertical = 2
+joystick_mode = 1
+visibility_mode = 1
+
+[node name="Control" type="Control" parent="CanvasLayer/Control" unique_id=353167537]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -212.0
+offset_top = -225.0
+offset_right = -81.0
+offset_bottom = -94.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="TouchScreenButton2" type="TouchScreenButton" parent="CanvasLayer/Control/Control" unique_id=729649941]
+position = Vector2(50, -206)
+texture_normal = ExtResource("1_oul6g")
+action = "ui_select"
+
+[node name="TouchScreenButton3" type="TouchScreenButton" parent="CanvasLayer/Control/Control" unique_id=2111981814]
+position = Vector2(37, 25)
+texture_normal = ExtResource("1_oul6g")
+action = "ui_accept"
+
+[node name="ColorRect" type="Panel" parent="CanvasLayer/Control" unique_id=1859203312]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g7b7a")
