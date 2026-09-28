@@ -1,0 +1,98 @@
+[gd_scene format=3 uid="uid://dnwwwvqumpbo"]
+
+[ext_resource type="Texture2D" uid="uid://bocoa35fo2ylx" path="res://icon.svg" id="1_mwaha"]
+[ext_resource type="Script" uid="uid://cuarevif4tbec" path="res://instancias.gd" id="2_ep7es"]
+[ext_resource type="PackedScene" uid="uid://gxgylar256j1" path="res://player/player.tscn" id="3_oix6d"]
+[ext_resource type="Script" uid="uid://hd25thgg3r56" path="res://fps.gd" id="4_ep7es"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_g85aa"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_mwaha"]
+sky_material = SubResource("ProceduralSkyMaterial_g85aa")
+
+[sub_resource type="Environment" id="Environment_uxj3p"]
+background_mode = 2
+sky = SubResource("Sky_mwaha")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gyc6d"]
+albedo_texture = ExtResource("1_mwaha")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_g7b7a"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mwaha"]
+size = Vector3(2, 0.001, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_tit00"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x66r2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_oix6d"]
+font_size = 20
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ep7es"]
+font_size = 30
+outline_size = 20
+outline_color = Color(0, 0, 0, 1)
+
+[node name="main" type="Node3D" unique_id=1565287781]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1981766676]
+environment = SubResource("Environment_uxj3p")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=616315274]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1574777799]
+transform = Transform3D(84.13634, 0, 0, 0, 31.489109, 0, 0, 0, 31.489109, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_gyc6d")
+mesh = SubResource("PlaneMesh_g7b7a")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D" unique_id=1833850093]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D" unique_id=204330112]
+shape = SubResource("BoxShape3D_mwaha")
+
+[node name="Marker3D" type="Marker3D" parent="." unique_id=1376946547 node_paths=PackedStringArray("boton", "label_cantidad")]
+transform = Transform3D(1, 0, 0, 0, 0.9086853, 0.41748172, 0, -0.41748172, 0.9086853, 0, 4.288806, 0)
+script = ExtResource("2_ep7es")
+mesh_cubo = SubResource("BoxMesh_tit00")
+collision_shape = SubResource("BoxShape3D_x66r2")
+friccion = 0.0
+boton = NodePath("../CanvasLayer/boton_instancia")
+label_cantidad = NodePath("../CanvasLayer/cantidad_instancia")
+
+[node name="Player" parent="." unique_id=444559745 instance=ExtResource("3_oix6d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.152346, 16.302166)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=650977779]
+
+[node name="fps" type="Label" parent="CanvasLayer" unique_id=895680785]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "fps"
+label_settings = SubResource("LabelSettings_oix6d")
+script = ExtResource("4_ep7es")
+
+[node name="boton_instancia" type="Button" parent="CanvasLayer" unique_id=551015148]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -312.0
+offset_bottom = 100.0
+grow_horizontal = 0
+
+[node name="cantidad_instancia" type="Label" parent="CanvasLayer" unique_id=906168948]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 40.0
+grow_vertical = 0
+text = "bloques:"
+label_settings = SubResource("LabelSettings_ep7es")
